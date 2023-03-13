@@ -13,11 +13,7 @@ export function App(props) {
     <>
     <h1>Hola {props.nombre}</h1>
     <p>Hoy es {props.fecha}</p>
-    {
-      clasesGrabadas.map( clase => {
-        return <ClaseGrabacion key={clase.nro} nro={clase.nro} tema={clase.tema} fecha={clase.fecha}/>
-      })
-    }  
+    <ClaseGrabacion nro={2} fecha="14/03/23" tema="React Hooks" />
     </>
   )  // jsx
 }
