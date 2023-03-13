@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App nombre="Gaston" fecha="11/03/23"/>
+    <App tema="React - Hooks" fecha="11/03/23"/>
   </React.StrictMode>
 );
 

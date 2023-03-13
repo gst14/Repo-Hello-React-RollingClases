@@ -1,19 +1,20 @@
 // Functional component O Componente basado en funcion
 
-import { ClaseGrabacion } from "./ClaseGrabacion";
-const clasesGrabadas = [
-  {nro: 1, tema: "HTML",fecha:"01/10/22"},
-  {nro: 2, tema: "Flexbox",fecha:"06/11/22"},
-  {nro: 3, tema: "Array method",fecha:"03/02/23"},
-  {nro: 4, tema: "Promesas",fecha:"20/02/23"},
-]
+import { useState } from "react"
+
 // PROPS => Properties
-export function App(props) {
+export function App({tema, fecha}) {
+
+  const COUNTER_DEFAULT = 10
+  const [counter, setCounter] = useState(COUNTER_DEFAULT)
   return (
     <>
-    <h1>Hola {props.nombre}</h1>
-    <p>Hoy es {props.fecha}</p>
-    <ClaseGrabacion nro={2} fecha="14/03/23" tema="React Hooks" />
+        <h1>Tema: {tema} - Fecha: {fecha}</h1>
+        <h4>Counter APP</h4>
+        <h2>Contador: {counter}</h2>
+        <button onClick={()=> setCounter( counter + 1 ) }>+1</button>
+        <button onClick={ ()=>setCounter( counter - 1 ) }>-1</button>
+        <button onClick={ ()=> setCounter(COUNTER_DEFAULT) }>Reset</button>
     </>
   )  // jsx
 }
