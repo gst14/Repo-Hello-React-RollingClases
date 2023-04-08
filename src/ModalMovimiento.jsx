@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 
-export const ModalMovimiento = ({show}) => {
-  const [openModal, setOpenModal] = useState(show);
-
+export const ModalMovimiento = () => {
+  const [openModal, setOpenModal] = useState(true);
   const handleClose = () => setOpenModal(false);
+  
   return (
-    <Modal show={openModal} onHide={handleClose}>
+    <Modal fade={false} show={openModal} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Modal heading</Modal.Title>
       </Modal.Header>

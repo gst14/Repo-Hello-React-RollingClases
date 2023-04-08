@@ -1,37 +1,41 @@
 import React, { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Card, CardBody, Heading, Text } from "@chakra-ui/react";
+import { useEffect } from "react";
+import axios from "axios";
 
 export const Ingresos = () => {
-  const [showModal, setShowModal] = useState(false);
-  const handleClose = () => setShowModal(false);
-  return (
-    <div>
-      <h3>Ingresos</h3>
-      <Button
-        variant="success"
-        onClick={() => {
-          setShowModal(!showModal);
-        }}
-      >
-        Agregar +
-      </Button>
-      <Modal show={showModal} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>Ingrese valor a sumar al balance</p>
-          <input type="number" name="egresoValor" id="egresoValor" />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Cerrar
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Guardar Cambios
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </div>
+  const [ingresos, setIngresos] = useState([]);
+  const BASE_URL = "http://localhost:3000";
+  const obtenerTotalIngresos = () => {
+    let total = 0
+    ingresos.forEach(ingreso => {
+      total += ingreso.monto
+    })
+    return total
+  }
+
+  useEffect(() => {
+    axios.get(`${BASE_URL}/ingresos`)
+      .then((response) => {
+        setIngresos(response.data)
+      }
+      )
+  }, [])
+
+    return (
+    <>
+      <Heading>Ingresos - ${obtenerTotalIngresos()}</Heading>
+    {
+      ingresos.map( (ingreso) => {
+        return (  
+          <Card key={ingreso.id} marginBottom={3}>
+            <CardBody>
+              <Text>${ingreso.monto} - {ingreso.detalle}</Text>
+            </CardBody>
+          </Card>
+        )
+      })
+    }
+    </>
   );
 };
