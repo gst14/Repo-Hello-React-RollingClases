@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { Stack } from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export const SideMenu = () => {
   return (
@@ -22,38 +22,40 @@ export const SideMenu = () => {
     >
       <Stack divider={<StackDivider />} spacing="4">
         <Box>
-          <Text>letsbalance.com</Text>
+          <NavLink ativeclassname="active" to="/">
+            <Text>Market Place</Text>
+          </NavLink>
         </Box>
         <Box>
           <Heading size="xs" textTransform="uppercase">
-            <NavLink activeClassName="active" to="/">
+            <NavLink ativeclassname="active" to="/">
               <Text>Inicio</Text>
             </NavLink>
           </Heading>
           <Text pt="2" fontSize="sm">
-            Detalle breve de tu cuenta
+            Resumen
           </Text>
         </Box>
         <Divider />
         <Box>
           <Heading size="xs" textTransform="uppercase">
-            <NavLink activeClassName="active" to="/transferencias">
-              Transferencias
+            <NavLink ativeclassname="active" to="/productos">
+              Productos
             </NavLink>
           </Heading>
           <Text pt="2" fontSize="sm">
-            Realizar / Revisar transferencias
+            Tus productos
           </Text>
         </Box>
         <Divider />
         <Box>
           <Heading size="xs" textTransform="uppercase">
-            <NavLink activeClassName="active" to="/analitics">
-              Analitics
+            <NavLink ativeclassname="active" to="/ventas">
+              Ventas
             </NavLink>
           </Heading>
           <Text pt="2" fontSize="sm">
-            Graficas de tus movimientos
+            Tus ventas
           </Text>
         </Box>
       </Stack>
