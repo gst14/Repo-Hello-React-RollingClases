@@ -17,7 +17,6 @@ export const ProductsPage = () => {
     const { data } = await axios.get("/productos");
     setproducts(data);
     setIsLoading(false);
-    console.log("Get products");
   };
 
   useEffect(() => {

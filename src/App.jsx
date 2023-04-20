@@ -6,7 +6,7 @@ import { SiteUnderContruction } from "./Pages/SiteUnderContruction";
 import { ProductsPage } from "./Pages/ProductsPage";
 import axios from "axios";
 import { FormProduct } from "./components/FormProduct";
-axios.defaults.baseURL = "http://localhost:8085";
+axios.defaults.baseURL = "http://localhost:8085/api";
 
 export function App() {
   return (

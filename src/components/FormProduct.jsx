@@ -44,15 +44,22 @@ export const FormProduct = (props) => {
         if (response.status === 200) {
           await props.getProducts();
           toast({
-            title: "Nuevo producto",
+            title: "Producto modificado",
             description: "El producto ha sido modificado correctamente",
             status: "success",
             duration: 2000,
             isClosable: true,
           });
+          setFormValues({
+            nombre: "",
+            precio: 0,
+            stock: 0,
+          });
+          setProduct({});
           props.setMode("");
         }
-      } else {
+      } 
+      if(props.mode === "new"){
         const response = await axios.post("/productos", {...formValues});
         if (response.status === 201) {
           await props.getProducts();
@@ -63,6 +70,12 @@ export const FormProduct = (props) => {
             duration: 2000,
             isClosable: true,
           });
+          setFormValues({
+            nombre: "",
+            precio: 0,
+            stock: 0,
+          });
+          setProduct({});
           props.setMode("");
         }
       }
@@ -81,9 +94,9 @@ export const FormProduct = (props) => {
   return (
     <div className="pt-3 col-12 col-md-6">
       <h2>{props.mode === "edit" ? "Editar Producto" : "Nuevo Producto"}</h2>
-      <form onSubmit={(e) => {
+      <form onSubmit={async(e) => {
         e.preventDefault()
-        saveProduct()
+        await saveProduct()
         }}>
         <div className="mb-3">
           <label htmlFor="nombre" className="form-label">
@@ -131,7 +144,6 @@ export const FormProduct = (props) => {
           <button
             type="submit"
             className="btn btn-primary w-auto"
-            onClick={saveProduct}
           >
             <span>{props.mode === "edit" ? "Actualizar" : "Guardar"}</span>
             <FaSave />
