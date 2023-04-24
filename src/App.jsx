@@ -5,7 +5,9 @@ import { NoPage } from "./Pages/NoPage";
 import { SiteUnderContruction } from "./Pages/SiteUnderContruction";
 import { ProductsPage } from "./Pages/ProductsPage";
 import axios from "axios";
-import { FormProduct } from "./components/FormProduct";
+// import { FormProduct } from "./components/FormProduct";
+import { LoginPage } from "./Pages/LoginPage";
+import { RegisterPage } from "./Pages/RegisterPage";
 axios.defaults.baseURL = "http://localhost:8085/api";
 
 export function App() {
@@ -13,6 +15,8 @@ export function App() {
     <ChakraProvider>
       <BrowserRouter>
         <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/registro" element={<RegisterPage />} />
           <Route path="/" element={<HomePage />}>
             <Route path="" element={<SiteUnderContruction />} />
 
