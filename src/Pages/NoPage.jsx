@@ -11,7 +11,7 @@ export const NoPage = () => {
           colorScheme="teal"
           variant="solid"
           onClick={() => {
-            navigate("/");
+            navigate("/inicio");
           }}
         >
           Volver al inicio

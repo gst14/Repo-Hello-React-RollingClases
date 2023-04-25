@@ -3,14 +3,28 @@ import {
   Divider,
   Flex,
   Heading,
+  Menu,
+  MenuButton,
   StackDivider,
+  MenuItem,
+  MenuList,
+  MenuGroup,
+  MenuDivider,
   Text,
 } from "@chakra-ui/react";
 import React from "react";
-import { Stack } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { Button, Stack } from "react-bootstrap";
+import { NavLink, useNavigate } from "react-router-dom";
+import { SettingsIcon } from '@chakra-ui/icons'
 
 export const SideMenu = () => {
+  const navigate = useNavigate();
+
+  const closeSession = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
   return (
     <Flex
       flexDirection={"column"}
@@ -22,13 +36,13 @@ export const SideMenu = () => {
     >
       <Stack divider={<StackDivider />} spacing="4">
         <Box>
-          <NavLink ativeclassname="active" to="/">
+          <NavLink className={({isActive})=> isActive? "active" : ""} to="">
             <Text>Market Place</Text>
           </NavLink>
         </Box>
         <Box>
           <Heading size="xs" textTransform="uppercase">
-            <NavLink ativeclassname="active" to="/">
+            <NavLink className={({isActive})=> isActive? "active" : ""} to="">
               <Text>Inicio</Text>
             </NavLink>
           </Heading>
@@ -39,7 +53,7 @@ export const SideMenu = () => {
         <Divider />
         <Box>
           <Heading size="xs" textTransform="uppercase">
-            <NavLink ativeclassname="active" to="/productos">
+            <NavLink className={({isActive})=> isActive? "active" : ""} to="productos">
               Productos
             </NavLink>
           </Heading>
@@ -50,13 +64,32 @@ export const SideMenu = () => {
         <Divider />
         <Box>
           <Heading size="xs" textTransform="uppercase">
-            <NavLink ativeclassname="active" to="/ventas">
+            <NavLink className={({isActive})=> isActive? "active" : ""} to="ventas">
               Ventas
             </NavLink>
           </Heading>
           <Text pt="2" fontSize="sm">
             Tus ventas
           </Text>
+        </Box>
+        <Divider />
+        <Box>
+          <Menu>
+            <MenuButton as={Button} className="border w-100" variant="outline">
+            <div className="d-flex align-items-center w-100 gap-3"><SettingsIcon /> <span>Perfil</span> </div>
+            </MenuButton>
+            <MenuList>
+              <MenuGroup title="Sesion">
+                <MenuItem onClick={closeSession}>Cerrar Sesión</MenuItem>
+                <MenuItem onClick={()=> navigate("config")}>Configuración</MenuItem>
+              </MenuGroup>
+              <MenuDivider />
+              <MenuGroup title="Soporte">
+                <MenuItem onClick={()=> navigate("docs")}>Documentación</MenuItem>
+                <MenuItem onClick={()=> navigate("comunidad")}>Comunidad</MenuItem>
+              </MenuGroup>
+            </MenuList>
+          </Menu>
         </Box>
       </Stack>
     </Flex>

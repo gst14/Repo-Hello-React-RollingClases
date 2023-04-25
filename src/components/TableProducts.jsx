@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { FaPen, FaTrashAlt } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useToast } from "@chakra-ui/react";
 

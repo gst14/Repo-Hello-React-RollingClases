@@ -1,9 +1,18 @@
 import { Box, Flex } from '@chakra-ui/react'
-import React from 'react'
-import { Outlet } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { SideMenu } from '../components/SideMenu'
+import { tokenIsValid } from '../utils/tokenIsValid'
 
 export const HomePage = () => {
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!tokenIsValid()) {
+      navigate("/login");
+    }
+  },[navigate]);
   return (
     <>
       <Flex>

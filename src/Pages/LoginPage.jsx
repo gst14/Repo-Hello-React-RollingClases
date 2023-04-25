@@ -1,24 +1,36 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import axios from 'axios'
+import { tokenIsValid } from '../utils/tokenIsValid'
+
 export const LoginPage = () => {
 
+  const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors } } = useForm()
 
-  const onSubmit = (data) => {
-    if (errors) {
-      console.log(errors)
-      return
-    }
-    console.log(data)
+  const submit = (data) => {
+    axios.post('/usuarios/login', data)
+      .then(res => {
+        let value = res["data"]["token"]
+        localStorage.setItem('token', value)
+        navigate('/inicio')
+      })
+      .catch(err => console.log(err))
   }
+
+  useEffect(() => {
+    if(tokenIsValid()){
+      navigate('/')
+    }
+  })
 
   return (
     <div className="container-fluid">
       <div className="row d-grid align-items-center vh-100">
         <div className="col-12 col-md-4 offset-md-4">
           <h2 className='text-center'>Login</h2>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(submit)}>
             <div className="mb-3">
               <label htmlFor="email" className="form-label">
                 Email
